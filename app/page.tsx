@@ -12,7 +12,7 @@ export default async function Home() {
   const session = await getServerSession(nextAuthOptions);
   const user = session?.user as User;
 
-  let purchaseBookIds: string[];
+  let purchaseBookIds: string[] = []; // 初期化
 
   if (user) {
     const response = await fetch(
@@ -28,6 +28,7 @@ export default async function Home() {
 
     // console.log(purchaseBookIds);
   }
+
   return (
     <>
       <main className="flex flex-wrap justify-center items-center md:mt-32 mt-20">
@@ -38,7 +39,7 @@ export default async function Home() {
           <Book
             key={book.id}
             book={book}
-            isPurchased={purchaseBookIds.includes(book.id)}
+            isPurchased={purchaseBookIds.includes(book.id)} // 安全にアクセス
           />
         ))}
       </main>
